@@ -1,0 +1,35 @@
+################
+#### Step 1 ####
+################
+
+ssh student@localhost -L 21500:10.50.23.236:23 -NT
+
+telnet localhost 21500
+
+ssh student@10.50.34.214 -R 21599:localhost:8462 -NT
+
+################
+#### Step 2 ####
+################
+
+ssh net2_student15@localhost -p 21599 -L 21501:192.168.100.60:22 -NT
+
+################
+#### Step 3 ####
+################
+
+ssh net2_student15@localhost -p 21501 -L 21502:10.90.50.140:6481 -NT
+
+################
+#### Step 4 ####
+################
+
+ssh net2_student15@localhost -p 21502 -L 21503:172.20.21.5:23 -NT
+
+telnet localhost 21503
+
+ssh net2_student15@172.20.21.4 -p 6481 -R 21598:localhost:22 -NT
+
+ssh net2_student15@localhost -p 21502 -L 21504:localhost:21598 -NT
+
+ssh net2_student15@localhost -p 21504 -D 9050
