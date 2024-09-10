@@ -1,0 +1,38 @@
+##############
+####Step 1####  ---- Estabilish a Dynamic Tunnel To Sterling
+##############
+
+ssh net2_student15@10.50.38.17 -D 9050
+
+##############
+####Step 2####  ---- Estabilish a Reverse Tunnel From Lana To Sterling Then a Dynamic tunnel through said Tunnel
+##############
+
+
+ssh net2_student15@10.50.38.17 -L 21500:10.1.2.200:23 -NT
+
+telnet localhost 21500
+
+ssh net2_student15@10.1.2.130 -R 21599:localhost:8976 -NT
+
+ssh net2_student15@10.50.38.17 -L 21501:localhost:21599 -NT
+
+##############
+####Step 3####
+##############
+
+
+ssh net2_student15@localhost -p 21501 -L 21502:10.2.5.20:22 -NT
+
+##############
+####Step 4####
+##############
+
+
+ssh net2_student15@localhost -p 21502 -L 21503:10.3.9.39:23 -NT
+
+telnet localhost 21503
+
+ssh net2_student15@10.3.9.33 -R 21598:localhost:3597 -NT
+
+ssh net2_student15@localhost -p 21502 -L 21504:localhost:21598 -NT
